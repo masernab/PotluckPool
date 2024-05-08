@@ -15,6 +15,7 @@ class Member extends Model
         'name',
         'email',
         'phone',
+        'is_owner',
     ];
 
     public function events(): BelongsToMany

@@ -7,6 +7,7 @@ use App\Models\BankAccount;
 use App\Models\Event;
 use App\Models\Member;
 use App\Models\Purchase;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,6 +22,11 @@ class DatabaseSeeder extends Seeder
                         BankAccount::factory()->count(rand(1,3))
                     )
                     ->count(8)
+                    ->sequence(
+                        ['is_owner' => 1],
+                        ['is_owner' => 0],
+                        ['is_owner' => 0],
+                    )
             )
             ->create();
 
