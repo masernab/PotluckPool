@@ -2,7 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Models\Event;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -14,8 +16,15 @@ class EventWizard extends Component
 
     public function mount(string $stepName = null): void
     {
-        $this->stepName = $stepName ?: $this->steps()[0];
         $this->allSteps = $this->steps();
+
+        if ($stepName) {
+            $this->stepName = $stepName;
+        } elseif(Cache::has('event-id')) {
+            $this->stepName = CreateEventStepComponent::class;
+        } else {
+            $this->stepName = $this->steps()[0];
+        }
     }
 
     public function render(): View
@@ -26,7 +35,7 @@ class EventWizard extends Component
     public function steps(): array
     {
         return [
-            GeneralInfoStepComponent::class,
+//            GeneralInfoStepComponent::class,
             CreateEventStepComponent::class,
         ];
     }
