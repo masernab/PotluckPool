@@ -20,8 +20,8 @@ class EventWizard extends Component
 
         if ($stepName) {
             $this->stepName = $stepName;
-        } elseif(Cache::has('event-id')) {
-            $this->stepName = CreateEventStepComponent::class;
+        } elseif(Cache::has('step-name')) {
+            $this->stepName = Cache::get('step-name');
         } else {
             $this->stepName = $this->steps()[0];
         }
@@ -35,7 +35,7 @@ class EventWizard extends Component
     public function steps(): array
     {
         return [
-//            GeneralInfoStepComponent::class,
+            GeneralInfoStepComponent::class,
             CreateEventStepComponent::class,
         ];
     }

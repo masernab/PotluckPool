@@ -35,4 +35,9 @@ trait WizardTrait
         }
     }
 
+    public function goToStep(string $stepName): void
+    {
+        $this->dispatch('set-step', $stepName);
+    }
+
 }
